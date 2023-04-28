@@ -26,3 +26,19 @@ var getMovieQuery = function(movie) {
 };
 getMovieQuery('batman');
 console.log('hi');
+ 
+var searchBtn = document.querySelector(".ui button");
+var input = document.querySelector("input")
+
+
+var searchMovie = function(event) {
+    event.preventDefault();
+    var movieTitle = input.value.trim();
+    if(movieTitle) {
+       getMovieQuery(movieTitle);
+       input.value = "";
+    } else {
+        //  TODO Add modal alert
+    }
+};
+searchBtn.addEventListener("click", searchMovie);
