@@ -43,6 +43,7 @@ var searchMovie = function(event) {
 };
 searchBtn.addEventListener("click", searchMovie);
 
+// below is the code to dynamically generate the movie cards
   const container = document.getElementById('results');
   
   apiResult.forEach((result) => {
