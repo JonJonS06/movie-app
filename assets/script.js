@@ -18,44 +18,13 @@ var searchMovie = function(event) {
 };
 searchBtn.addEventListener("click", searchMovie);
 
-console.log('hello');
-const apiResult = [{
-    title: "Batman",
-    description: "Its a movie about batman, he does batman stuff, saves the day hoorah",
-    releaseYear: "2020",
-    runTime: 'forever'
-  }, {
-    title: "superman",
-    description: "superman flys in, saves the day, yay. good synopsis",
-    releaseYear: "2005",
-    runTime: "3min"
-  }, {
-    title: "Title 3",
-    description: "I have no more ideas",
-    releaseYear: "2103",
-    runTime: '3hrs'
-  }, {
-    title: "superman",
-    description: "superman flys in, saves the day, yay. good synopsis",
-    releaseYear: "2005",
-    runTime: "3min"
-  }, {
-    title: "Title 3",
-    description: "I have no more ideas",
-    releaseYear: "2103",
-    runTime: '3hrs'
-  }
-];
-  
-  
   const container = document.getElementById('results');
   
   apiResult.forEach((result) => {
-    // Create card element
+
     const card = document.createElement('div');
     card.classList = 'card-body';
   
-    // Construct card content
     const content = `
     <div class="ui card">
     <div class="image">
@@ -84,6 +53,5 @@ const apiResult = [{
   </div>
     `;
   
-    // Append newyly created card element to the container
     container.innerHTML += content;
   })
