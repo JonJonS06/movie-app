@@ -42,3 +42,42 @@ var searchMovie = function(event) {
     }
 };
 searchBtn.addEventListener("click", searchMovie);
+
+// below is the code to dynamically generate the movie cards
+  const container = document.getElementById('results');
+  
+  apiResult.forEach((result) => {
+
+    const card = document.createElement('div');
+    card.classList = 'card-body';
+  
+    const content = `
+    <div class="ui card">
+    <div class="image">
+      <img src="./batman-superman.jpg">
+    </div>
+    <div class="content">
+      <a class="header">${result.title}</a>
+      <div class="meta">
+        <span class="date">${result.releaseYear}</span>
+        <span class="runtime">${result.runTime}</span>
+      </div>
+      <div class="description">
+        ${result.description}
+      </div>
+    </div>
+    <div class="extra content">
+      <a>
+        <button class="ui button">Learn More</button>
+      </a>
+      <div class="ui animated button" tabindex="0">
+        <div class="visible content">Favorite</div>
+        <div class="hidden content">
+          <i class="heart icon"></i>
+        </div>
+    </div>
+  </div>
+    `;
+  
+    container.innerHTML += content;
+  })
