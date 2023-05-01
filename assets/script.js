@@ -100,3 +100,13 @@ function displayMovieCards (data) {
 
   }
 }
+
+localStorage.setItem('')
+
+
+var learnMoreBtn = document.querySelector('#learnMore')
+
+var getMovieData = function () {
+  fetch('http://www.omdbapi.com/?apikey=9b9137db&tt0372784&plot=full&imdbID=' + movieID)
+        
+}
