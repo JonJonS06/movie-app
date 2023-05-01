@@ -91,6 +91,10 @@ function displayMovieCards (data) {
     $(hidden).addClass("hidden content");
     var icon = document.createElement('i');
     $(icon).addClass("heart icon");
+    var hiddenId = document.createElement('p');
+    $(hiddenId).hide();
+    hiddenId.textContent= data.imdbID;
+    extra.append(hiddenId);
     hidden.append(icon);
     favorite.append(hidden);
     extra.append(favorite);
