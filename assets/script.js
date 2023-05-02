@@ -90,6 +90,7 @@ function displayMovieCards (data) {
     var icon = document.createElement('i');
     $(icon).addClass("heart icon");
     var hiddenId = document.createElement('p');
+    $(hiddenId).attr('id', 'imdbId');
     $(hiddenId).hide();
     hiddenId.textContent= data.imdbID;
     extra.append(hiddenId);
@@ -104,15 +105,15 @@ function displayMovieCards (data) {
 }
 
 
-// function getMovie () {
 
-//   console.log('Its working')
-// }
 var learnMoreBtn = document.querySelector('.learnMore');
   document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains ('learnMore')) {
-      
-      console.log('Its Working')
+      var getID = event.target.parentElement.nextSibling;
+      var logID = getID.textContent;
+      localStorage.setItem('imdbID', JSON.stringify(logID));
+      window.location.replace("./learnMore.html");
+      console.log(logID)
     }
   });
 
