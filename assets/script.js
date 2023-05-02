@@ -1,7 +1,7 @@
 let requestMovieUrl = ' http://www.omdbapi.com/?apikey=9b9137db';
 let requestVideoUrl = 'https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc&part=snippet,contentDetails,statistics,status';
 let requestMapUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc&libraries=places'
-var resultContainer = document.getElementById('results')
+var resultContainer = document.getElementById('results');
 var getMovieQuery = function(movie) {
     var apiUrl = requestMovieUrl + '&s=' + movie;
 
@@ -31,6 +31,7 @@ var input = document.querySelector("input")
 
 var searchMovie = function(event) {
     event.preventDefault();
+    // resultContainer = '';
     var movieTitle = input.value.trim();
     if(movieTitle) {
        getMovieQuery(movieTitle);
@@ -42,6 +43,7 @@ var searchMovie = function(event) {
 searchBtn.addEventListener("click", searchMovie);
 
 function displayMovieCards (data) {
+  $(resultContainer).empty();
   var movieArray= data.Search;
   for (var i = 0; i < movieArray.length; i++) {
     var data = movieArray[i];
@@ -68,10 +70,6 @@ function displayMovieCards (data) {
     type.textContent= data.Type;
     meta.append(type);
     main.append(meta);
-    var description = document.createElement('div');
-    $(description).addClass("description");
-    description.textContent= "Placeholder";
-    main.append(description);
     uiCard.append(main);
     var extra = document.createElement('div');
     $(extra).addClass("extra content");
@@ -100,7 +98,7 @@ function displayMovieCards (data) {
     extra.append(favorite);
     uiCard.append(extra);
     resultContainer.append(uiCard);
-
+    $(uiCard).addClass("column");
 
   }
 }
