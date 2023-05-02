@@ -77,7 +77,7 @@ function displayMovieCards (data) {
     $(extra).addClass("extra content");
     var learnMore = document.createElement('a');
     var moreButton = document.createElement('button');
-    $(moreButton).addClass("ui button");
+    $(moreButton).addClass("ui button learnMore");
     moreButton.textContent="Learn More";
     learnMore.append(moreButton);
     extra.append(learnMore);
@@ -105,12 +105,17 @@ function displayMovieCards (data) {
   }
 }
 
-localStorage.setItem('')
 
+// function getMovie () {
 
-var learnMoreBtn = document.querySelector('#learnMore')
+//   console.log('Its working')
+// }
+var learnMoreBtn = document.querySelector('.learnMore');
+  document.body.addEventListener("click", function(event) {
+    if (event.target.classList.contains ('learnMore')) {
+      
+      console.log('Its Working')
+    }
+  });
 
-var getMovieData = function () {
-  fetch('http://www.omdbapi.com/?apikey=9b9137db&tt0372784&plot=full&imdbID=' + movieID)
         
-}
