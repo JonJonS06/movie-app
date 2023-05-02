@@ -2,26 +2,25 @@ let requestMovieUrl = ' http://www.omdbapi.com/?apikey=9b9137db';
 let requestVideoUrl = 'https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc&part=snippet,contentDetails,statistics,status';
 let requestMapUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc&libraries=places'
 var resultContainer = document.getElementById('results')
+var modal = document.querySelector('.modal');
+var modalDescription = document.querySelector('.modal-content');
+
 var getMovieQuery = function(movie) {
     var apiUrl = requestMovieUrl + '&s=' + movie;
 
     fetch(apiUrl)
         .then(function (response) {  
             if (response.ok) {
-                console.log(response);
                 response.json().then(function (data) {
-                    console.log(data.Search);
                     displayMovieCards(data)
                 });
             } else {
-                // TODO add modal after adding html and css styling
-                // modal.style.display = 'block'
-                // modal.textContent = 'Error: ' + response.statusText);
+                modalDescription.textContent = 'Error: ' + response.statusText;
             }
         })
         .catch(function (error) {
-            // TODO continued add modal
-            // modal.textContent = 'Unable to connect to OMDb database';
+            modalDescription.textContent = 'Unable to connect to OMDb database';
+            $('.ui.modal').modal('show');
         })
 };
  
@@ -36,7 +35,8 @@ var searchMovie = function(event) {
        getMovieQuery(movieTitle);
        input.value = "";
     } else {
-        //  TODO Add modal alert
+        modalDescription.textContent = 'Please input a movie title to search.';
+        $('.ui.modal').modal('show');
     }
 };
 searchBtn.addEventListener("click", searchMovie);
