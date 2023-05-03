@@ -47,6 +47,7 @@ function displayMovieCards (data) {
   var movieArray= data.Search;
   for (var i = 0; i < movieArray.length; i++) {
     var data = movieArray[i];
+    var movieTitle= data.Title;
     var uiCard = document.createElement('div')
     $(uiCard).addClass("ui card")
     var img = $('<img />', { 
@@ -56,7 +57,7 @@ function displayMovieCards (data) {
     var main = document.createElement('div');
     $(main).addClass("content");
     var title = document.createElement('a');
-    $(title).addClass("header");
+    $(title).addClass("header movieTitle");
     title.textContent = data.Title;
     main.append(title);
     var meta = document.createElement('div');
@@ -80,15 +81,15 @@ function displayMovieCards (data) {
     learnMore.append(moreButton);
     extra.append(learnMore);
     var favorite = document.createElement('div');
-    $(favorite).addClass("ui animated button");
+    $(favorite).addClass("ui animated button favMovie");
     var visible = document.createElement('div');
-    $(visible).addClass("visible content");
+    $(visible).addClass("visible content favMovie");
     visible.textContent= "Favorite";
     favorite.append(visible);
     var hidden = document.createElement('div');
     $(hidden).addClass("hidden content");
     var icon = document.createElement('i');
-    $(icon).addClass("heart icon");
+    $(icon).addClass("heart icon favMovie");
     var hiddenId = document.createElement('p');
     $(hiddenId).hide();
     hiddenId.textContent= data.imdbID;
@@ -116,4 +117,32 @@ var learnMoreBtn = document.querySelector('.learnMore');
     }
   });
 
-        
+  var favoriteBtn = document.querySelector('.favMovie');
+  document.body.addEventListener("click", function(event) {
+    if (event.target.classList.contains ('favMovie')) {
+      
+    
+      console.log();
+      saveMovie();
+    }
+  });
+  
+  function saveMovie(data) {
+    var movieTitle = document.querySelector('.movieTitle')
+      likedMovie = {
+              Movie:movieTitle.textContent,
+          
+          }
+          console.log(likedMovie);
+          var favoriteMovies = localStorage.getItem("favoriteMovies");
+          if (favoriteMovies === null) {
+              favoriteMovies = [];
+          } else {
+              favoriteMovies = JSON.parse(favoriteMovies);
+          }
+          favoriteMovies.push(likedMovie);
+          var newSearch = JSON.stringify(favoriteMovies);
+          localStorage.setItem("favoriteMovies", newSearch);
+        }
+      // displayPreviousCities()
+    
