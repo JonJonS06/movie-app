@@ -1,4 +1,4 @@
-let requestMovieUrl = ' http://www.omdbapi.com/?apikey=9b9137db';
+let requestMovieUrl = ' https://www.omdbapi.com/?apikey=9b9137db';
 let requestVideoUrl = 'https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc&part=snippet,contentDetails,statistics,status';
 let requestMapUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc&libraries=places'
 var resultContainer = document.getElementById('results')
@@ -30,7 +30,6 @@ var input = document.querySelector("input")
 
 var searchMovie = function(event) {
     event.preventDefault();
-    // resultContainer = '';
     var movieTitle = input.value.trim();
     if(movieTitle) {
        getMovieQuery(movieTitle);
@@ -123,7 +122,6 @@ var learnMoreBtn = document.querySelector('.learnMore');
     if (event.target.classList.contains ('favMovie')) {
       
     
-      console.log();
       saveMovie();
     }
   });
@@ -145,5 +143,4 @@ var learnMoreBtn = document.querySelector('.learnMore');
           var newSearch = JSON.stringify(favoriteMovies);
           localStorage.setItem("favoriteMovies", newSearch);
         }
-      // displayPreviousCities()
     
