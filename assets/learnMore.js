@@ -1,7 +1,7 @@
 let requestMovieUrl = ' https://www.omdbapi.com/?apikey=9b9137db';
 
 var getMoreInfo = function(imdbID) {
-    var apiUrl = requestMovieUrl + '&i=' + imdbID;
+    var apiUrl = requestMovieUrl + '&i=' + imdbID + '&plot=full';
 
     fetch(apiUrl)
         .then(function (response) {  
