@@ -1,4 +1,4 @@
-let requestMovieUrl = ' http://www.omdbapi.com/?apikey=9b9137db';
+let requestMovieUrl = ' https://www.omdbapi.com/?apikey=9b9137db';
 let requestVideoUrl = 'https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc&part=snippet,contentDetails,statistics,status';
 let requestMapUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc&libraries=places'
 var resultContainer = document.getElementById('results')
@@ -30,7 +30,6 @@ var input = document.querySelector("input")
 
 var searchMovie = function(event) {
     event.preventDefault();
-    // resultContainer = '';
     var movieTitle = input.value.trim();
     if(movieTitle) {
        getMovieQuery(movieTitle);
@@ -47,6 +46,7 @@ function displayMovieCards (data) {
   var movieArray= data.Search;
   for (var i = 0; i < movieArray.length; i++) {
     var data = movieArray[i];
+    var movieTitle= data.Title;
     var uiCard = document.createElement('div')
     $(uiCard).addClass("ui card")
     var img = $('<img />', { 
@@ -56,7 +56,7 @@ function displayMovieCards (data) {
     var main = document.createElement('div');
     $(main).addClass("content");
     var title = document.createElement('a');
-    $(title).addClass("header");
+    $(title).addClass("header movieTitle");
     title.textContent = data.Title;
     main.append(title);
     var meta = document.createElement('div');
@@ -80,15 +80,15 @@ function displayMovieCards (data) {
     learnMore.append(moreButton);
     extra.append(learnMore);
     var favorite = document.createElement('div');
-    $(favorite).addClass("ui animated button");
+    $(favorite).addClass("ui animated button favMovie");
     var visible = document.createElement('div');
-    $(visible).addClass("visible content");
+    $(visible).addClass("visible content favMovie");
     visible.textContent= "Favorite";
     favorite.append(visible);
     var hidden = document.createElement('div');
     $(hidden).addClass("hidden content");
     var icon = document.createElement('i');
-    $(icon).addClass("heart icon");
+    $(icon).addClass("heart icon favMovie");
     var hiddenId = document.createElement('p');
     $(hiddenId).attr('id', 'imdbId');
     $(hiddenId).hide();
@@ -117,4 +117,30 @@ var learnMoreBtn = document.querySelector('.learnMore');
     }
   });
 
-        
+  var favoriteBtn = document.querySelector('.favMovie');
+  document.body.addEventListener("click", function(event) {
+    if (event.target.classList.contains ('favMovie')) {
+      
+    
+      saveMovie();
+    }
+  });
+  
+  function saveMovie(data) {
+    var movieTitle = document.querySelector('.movieTitle')
+      likedMovie = {
+              Movie:movieTitle.textContent,
+          
+          }
+          console.log(likedMovie);
+          var favoriteMovies = localStorage.getItem("favoriteMovies");
+          if (favoriteMovies === null) {
+              favoriteMovies = [];
+          } else {
+              favoriteMovies = JSON.parse(favoriteMovies);
+          }
+          favoriteMovies.push(likedMovie);
+          var newSearch = JSON.stringify(favoriteMovies);
+          localStorage.setItem("favoriteMovies", newSearch);
+        }
+    
