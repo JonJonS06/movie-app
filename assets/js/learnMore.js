@@ -104,12 +104,18 @@ function findVideo(imdbID) {
 function showVideo(video) {
   if (video){
     var embedlink = video.replace(/watch\?v=/,`embed/`)
+    var id = video.substring(32,video.length);
     var videocontainer = document.createElement('div');
-    $(videocontainer).addClass('ui container embed');
+    $(videocontainer).addClass('ui embed fullscreen');
     var videoplayer = document.createElement('iframe');
     $(videocontainer).attr('id','video');
+    $(videocontainer).attr('data-source','youtube');
+    $(videocontainer).attr('data-id',id);
     $(videoplayer).attr('src',embedlink);
     $(videoplayer).attr('class','fluid ui container');
+    $(videoplayer).attr('width','100%');
+    $(videoplayer).attr('height','100%');
+    $(videoplayer).attr('scrolling','no');
     $(videoplayer).appendTo(videocontainer);
     var main = document.getElementsByTagName('main');
     $(main).children().first().append(videocontainer);
