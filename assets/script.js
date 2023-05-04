@@ -4,7 +4,8 @@ let requestMapUrl = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCHGRBU3Fk
 var resultContainer = document.getElementById('results')
 var modal = document.querySelector('.modal');
 var modalDescription = document.querySelector('.modal-content');
-
+var clearBtn = document.getElementById('clear-btn');
+var favorites = document.getElementById('favorite-movies')
 var getMovieQuery = function(movie) {
     var apiUrl = requestMovieUrl + '&s=' + movie;
 
@@ -180,3 +181,8 @@ var learnMoreBtn = document.querySelector('.learnMore');
         }
         displayFavoriteMovies()
         
+clearBtn.addEventListener('click', clearFavorites)
+
+function clearFavorites() {
+  favorites.textContent = '';
+}
