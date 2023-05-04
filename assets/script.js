@@ -154,5 +154,29 @@ var learnMoreBtn = document.querySelector('.learnMore');
           favoriteMovies.push(likedMovie);
           var newSearch = JSON.stringify(favoriteMovies);
           localStorage.setItem("favoriteMovies", newSearch);
+          displayFavoriteMovies()
         }
     
+        function displayFavoriteMovies() {
+          var favorites = document.getElementById('favorite-movies')
+          favorites.textContent = '';
+          var favoriteMovies = localStorage.getItem("favoriteMovies");
+          var parsed = JSON.parse(favoriteMovies);
+          if (parsed !== null) {
+        
+        
+              for (var i = 0; i < parsed.length; i++) {
+         
+                  var createLi = document.createElement("li");
+                  createLi.textContent = parsed[i].Movie;
+                 
+                  favorites.appendChild(createLi);
+         
+              }
+          }
+        
+        
+           
+        }
+        displayFavoriteMovies()
+        
