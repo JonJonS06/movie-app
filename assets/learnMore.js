@@ -15,6 +15,7 @@ var getMoreInfo = function(imdbID) {
                 response.json().then(function (data) {
                     displayMovieCard(data);
                     displayExtraInfo(data);
+                    localStorage.removeItem("imdbID")
                 });
             } else {
                 modalDescription.textContent = 'Error: ' + response.statusText;
