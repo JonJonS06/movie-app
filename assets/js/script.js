@@ -107,7 +107,6 @@ function displayMovieCards (data) {
     uiCard.append(extra);
     resultContainer.append(uiCard);
     $(uiCard).addClass("column");
-
   }
 }
 
