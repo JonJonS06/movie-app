@@ -1,4 +1,10 @@
 let requestMovieUrl = ' https://www.omdbapi.com/?apikey=9b9137db';
+let backToHome = document.querySelector('#homeBtn');
+
+backToHome.addEventListener('click', function() {
+    window.location.replace('./index.html');
+})
+
 
 var getMoreInfo = function(imdbID) {
     var apiUrl = requestMovieUrl + '&i=' + imdbID + '&plot=full';
