@@ -18,3 +18,10 @@ var getMoreInfo = function(imdbID) {
             $('.ui.modal').modal('show');
         })
 };
+
+function getMoreData () {
+   var movie = JSON.parse(localStorage.getItem("imdbID"));
+   getMoreInfo(movie);
+
+}
+getMoreData();
