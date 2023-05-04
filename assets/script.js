@@ -13,6 +13,7 @@ var getMovieQuery = function(movie) {
             if (response.ok) {
                 response.json().then(function (data) {
                     displayMovieCards(data)
+                    console.log(data)
                 });
             } else {
                 modalDescription.textContent = 'Error: ' + response.statusText;
@@ -130,16 +131,17 @@ var learnMoreBtn = document.querySelector('.learnMore');
   var favoriteBtn = document.querySelector('.favMovie');
   document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains ('favMovie')) {
-      
+     var getTitle= event.target.parentElement.parentElement.parentElement.parentElement.firstChild.nextSibling.firstChild;
+     var movieTitle= getTitle.textContent
+     console.log(movieTitle)
     
-      saveMovie();
+      saveMovie(movieTitle);
     }
   });
   
-  function saveMovie(data) {
-    var movieTitle = document.querySelector('.movieTitle')
+  function saveMovie(movieTitle) {
       likedMovie = {
-              Movie:movieTitle.textContent,
+              Movie:movieTitle,
           
           }
           console.log(likedMovie);
