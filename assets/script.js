@@ -88,23 +88,14 @@ function displayMovieCards (data) {
     moreButton.textContent="Learn More";
     learnMore.append(moreButton);
     extra.append(learnMore);
-    var favorite = document.createElement('div');
-    $(favorite).addClass("ui animated button favMovie");
-    var visible = document.createElement('div');
-    $(visible).addClass("visible content favMovie");
-    visible.textContent= "Favorite";
-    favorite.append(visible);
-    var hidden = document.createElement('div');
-    $(hidden).addClass("hidden content");
-    var icon = document.createElement('i');
-    $(icon).addClass("heart icon favMovie");
+    var favorite = document.createElement('button');
+    $(favorite).addClass('ui button favMovie');
+    favorite.textContent= "Favorite"
     var hiddenId = document.createElement('p');
     $(hiddenId).attr('id', 'imdbId');
     $(hiddenId).hide();
     hiddenId.textContent= data.imdbID;
     extra.append(hiddenId);
-    hidden.append(icon);
-    favorite.append(hidden);
     extra.append(favorite);
     uiCard.append(extra);
     resultContainer.append(uiCard);
@@ -130,9 +121,8 @@ var learnMoreBtn = document.querySelector('.learnMore');
   var favoriteBtn = document.querySelector('.favMovie');
   document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains ('favMovie')) {
-     var getTitle= event.target.parentElement.parentElement.parentElement.parentElement.firstChild.nextSibling.firstChild;
+     var getTitle= event.target.parentElement.parentElement.parentElement.firstChild.nextSibling.firstChild.nextSibling.firstChild;
      var movieTitle= getTitle.textContent
-     console.log(movieTitle)
     
       saveMovie(movieTitle);
     }
