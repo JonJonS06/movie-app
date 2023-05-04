@@ -11,11 +11,16 @@ var getMovieQuery = function(movie) {
         .then(function (response) {  
             if (response.ok) {
                 response.json().then(function (data) {
-                    displayMovieCards(data)
-                    console.log(data)
+                    if (data!==undefined) {
+                      displayMovieCards(data);
+                    } else {
+                      modalDescription.textContent = 'Error: unable to find such movie.';
+                      $('.ui.modal').modal('show');
+                    }
                 });
             } else {
                 modalDescription.textContent = 'Error: ' + response.statusText;
+                $('.ui.modal').modal('show');
             }
         })
         .catch(function (error) {
@@ -56,8 +61,11 @@ function displayMovieCards (data) {
   for (var i = 0; i < movieArray.length; i++) {
     var data = movieArray[i];
     var movieTitle= data.Title;
-    var uiCard = document.createElement('div')
-    $(uiCard).addClass("ui card")
+    var uiCard = document.createElement('div');
+    $(uiCard).addClass("fluid ui card");
+    var spacer = document.createElement('div');
+    $(spacer).addClass("fluid ui hidden divider");
+    uiCard.append(spacer);
     var img = $('<img />', { 
       src: data.Poster,
     });
@@ -84,12 +92,13 @@ function displayMovieCards (data) {
     $(extra).addClass("extra content");
     var learnMore = document.createElement('a');
     var moreButton = document.createElement('button');
-    $(moreButton).addClass("ui button learnMore");
+    $(moreButton).addClass("fluid ui button learnMore");
     moreButton.textContent="Learn More";
     learnMore.append(moreButton);
     extra.append(learnMore);
+    learnMore.append(spacer);
     var favorite = document.createElement('button');
-    $(favorite).addClass('ui button favMovie');
+    $(favorite).addClass('fluid ui button favMovie');
     favorite.textContent= "Favorite"
     var hiddenId = document.createElement('p');
     $(hiddenId).attr('id', 'imdbId');
