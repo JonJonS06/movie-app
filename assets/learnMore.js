@@ -9,7 +9,6 @@ var getMoreInfo = function(imdbID) {
                 response.json().then(function (data) {
                     displayMovieCard(data);
                     displayExtraInfo(data);
-                    console.log(data)
                 });
             } else {
                 modalDescription.textContent = 'Error: ' + response.statusText;
@@ -20,11 +19,6 @@ var getMoreInfo = function(imdbID) {
             $('.ui.modal').modal('show');
         })
 };
-getMoreInfo("tt0077766");
-// function displayMore() {
-//     displayMovieCard();
-//     displayExtraInfo();
-// }
 function displayMovieCard (data) {
     var cardContainer= document.getElementsByClassName('card-container');
       var uiCard = document.createElement('div')
@@ -56,9 +50,14 @@ function displayMovieCard (data) {
   
     }
 
-    function displayExtraInfo() {
+    function displayExtraInfo(data) {
         var plot= document.getElementsByClassName('plot');
-        var cost= document.getElementsByClassName('cost');
+        $(plot).text(data.Plot);
+        var cast= document.getElementsByClassName('cast');
+        $(cast).text(data.Actors);
         var director= document.getElementsByClassName('director');
+        $(director).text(data.Director);
         var writer= document.getElementsByClassName('writer');
+        $(writer).text(data.Writer);
+        console.log(data.Plot)
     }
