@@ -13,6 +13,7 @@ var getMovieQuery = function(movie) {
             if (response.ok) {
                 response.json().then(function (data) {
                     displayMovieCards(data)
+                    console.log(data)
                 });
             } else {
                 modalDescription.textContent = 'Error: ' + response.statusText;
@@ -28,6 +29,7 @@ var searchBtn = document.querySelector(".ui button");
 var input = document.querySelector("input")
 
 
+
 var searchMovie = function(event) {
     event.preventDefault();
     var movieTitle = input.value.trim();
@@ -40,6 +42,14 @@ var searchMovie = function(event) {
     }
 };
 searchBtn.addEventListener("click", searchMovie);
+
+
+//Makes the 'Enter' key functional wiith the searchMovie function
+input.addEventListener("keypress", function(event) {
+  if (event.key == "Enter") {
+      searchMovie(event);
+  }
+});
 
 function displayMovieCards (data) {
   $(resultContainer).empty();
@@ -105,7 +115,9 @@ function displayMovieCards (data) {
 }
 
 
-
+//Adds event listner to the 'Learn More' button on each card.
+//Stores the IMDb ID to local storage.
+//Redirects user to the secondary page and more information.
 var learnMoreBtn = document.querySelector('.learnMore');
   document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains ('learnMore')) {
@@ -113,23 +125,23 @@ var learnMoreBtn = document.querySelector('.learnMore');
       var logID = getID.textContent;
       localStorage.setItem('imdbID', JSON.stringify(logID));
       window.location.replace("./learnMore.html");
-      console.log(logID)
     }
   });
 
   var favoriteBtn = document.querySelector('.favMovie');
   document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains ('favMovie')) {
-      
+     var getTitle= event.target.parentElement.parentElement.parentElement.parentElement.firstChild.nextSibling.firstChild;
+     var movieTitle= getTitle.textContent
+     console.log(movieTitle)
     
-      saveMovie();
+      saveMovie(movieTitle);
     }
   });
   
-  function saveMovie(data) {
-    var movieTitle = document.querySelector('.movieTitle')
+  function saveMovie(movieTitle) {
       likedMovie = {
-              Movie:movieTitle.textContent,
+              Movie:movieTitle,
           
           }
           console.log(likedMovie);
