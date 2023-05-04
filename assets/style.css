@@ -1,3 +1,29 @@
+header {
+    background: rgb(249, 202, 116);
+}
+main,body {
+    background: grey;
+}
+h1,h2 {
+    margin-top: 4rem;
+    padding: 2rem;
+}
+.three.wide.column {
+    margin-left: 1rem;
+    background: rgb(96, 87, 87);
+}
+.fluid.ui.card.column {
+    background: rgb(149, 43, 43);
+}
+.divider.separate {
+    background: black;
+}
+.fluid.ui.card.column {
+    margin: 1rem;
+}
+.learnMore {
+    margin-bottom: 2rem;
+}
 li {
     list-style: none;
     font-size: 1.5rem;

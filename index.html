@@ -9,31 +9,36 @@
     <title>Movie App</title>
 </head>
 <body>
-    <header class="ui center aligned header hero">
-        <h1 class="ui header blue">Movie App Title</h1>
+    <header class="ui center aligned dividing header black hero">
+        <h1 class="ui blue header">Movie App Title</h1>
     </header>
 
-    <main class="ui grid">
-        <div class="four wide column">
+    <main class="ui double stackable grid container">
+        <div class="ui three wide column">
             <h2 class="ui header">Enter movie title</h2>
-            <div class="ui input focus">
+            <div class="fluid ui input focus">
                 <input type="text" placeholder="Search...">
             </div>
-            <button class="ui button">Search</button>
+            <button class="fluid ui button">Search</button>
+            <hr>
+            <div class="favorites">
+                <button class="fluid ui button" id="clear-btn">
+                    Clear Favorites
+                </button>
+                <h2>Favorite Movies:</h2>
+                <p id="favorite-movies"></p>
+            </div>
         </div>
 
-        <div class="result-header">
-         <h2 class="ui header">Search Results</h2>   
-        </div>
-        <div class="four column row" id="results">
-        </div>
-
-        <div class="favorites">
-            <button class="ui button" id="clear-btn">
-                Clear Favorites
-              </button>
-            <h2>Favorite Movies:</h2>
-            <p id="favorite-movies"></p>
+        <div class="twelve wide column">
+            <div class="result-header">
+                <h2 class="ui center aligned header">Search Results</h2>
+            </div>
+            <div class="ui hidden divider separate"></div>
+            <div class="ui double stackable grid container">
+                <div class="four column row" id="results">
+                </div>
+            </div>
         </div>
 
         <div class="ui mini modal">
