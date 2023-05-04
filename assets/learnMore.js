@@ -1,5 +1,8 @@
 let requestMovieUrl = ' https://www.omdbapi.com/?apikey=9b9137db';
 let backToHome = document.querySelector('#homeBtn');
+let youtubeURL = 'https://www.googleapis.com/youtube/v3/search';
+let googleapiKey = 'AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc';
+let youtubeVideoURL = 'https://www.googleapis.com/youtube/v3/videos'
 
 backToHome.addEventListener('click', function() {
     window.location.replace('./index.html');
@@ -29,8 +32,7 @@ var getMoreInfo = function(imdbID) {
 function getMoreData () {
    var movie = JSON.parse(localStorage.getItem("imdbID"));
    getMoreInfo(movie);
-   
-
+   findVideo(movie);
 };
 
 getMoreData();
@@ -74,26 +76,32 @@ function displayExtraInfo(data) {
     $(director).text(data.Director);
     var writer= document.getElementsByClassName('writer');
     $(writer).text(data.Writer);
-    console.log(data.Plot)
 };
 
-function start() {
-    // Initializes the client with the API key and the Translate API.
-    gapi.client.init({
-      'apiKey': 'AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc',
-      'discoveryDocs': ['https://www.googleapis.com/youtube/v3/search'],
-    }).then(function() {
-      // Executes an API request, and returns a Promise.
-      return gapi.client.youtube.search.list({
-        q: `batman`,
-        part: 'snippet'
-      });
-    }).then(function(response) {
-      console.log(response.result.data.translations[0].translatedText);
-    }, function(reason) {
-      console.log('Error: ' + reason.result.error.message);
-    });
-  };
+function findVideo(imdbID) {
+  var query = `${youtubeURL}?part=snippet&q=${imdbID}%20trailer&key=${googleapiKey}`;
+  if (document.getElementsByClassName('movieTitle')) {
+    fetch(query)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      let videos = data.items;
+      for (let i = 0; i < videos.length; i++) {
+        if (videos[i].snippet.title.includes(document.querySelector('.movieTitle').textContent)) {
+          var videoMatch = videos[i];
+          console.log(videoMatch);
+          var videoID = videoMatch.id.videoId;
+          console.log(videoID);
+          var movieTrailerURL =`https://www.youtube.com/watch?v=${videoID}`;
+          console.log(movieTrailerURL);
+          break;
+        }
+      }
 
-  // Loads the JavaScript client library and invokes `start` afterwards.
-  gapi.load('client', start);
+    })
+  } else {
+    setTimeout(findVideo, 15);
+  }
+}
