@@ -5,6 +5,7 @@ let googleapiKey = 'AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc';
 let youtubeVideoURL = 'https://www.googleapis.com/youtube/v3/videos'
 
 backToHome.addEventListener('click', function() {
+    localStorage.removeItem("imdbID")
     window.location.replace('./index.html');
 })
 
@@ -17,7 +18,6 @@ var getMoreInfo = function(imdbID) {
                 response.json().then(function (data) {
                     displayMovieCard(data);
                     displayExtraInfo(data);
-                    localStorage.removeItem("imdbID")
                 });
             } else {
                 modalDescription.textContent = 'Error: ' + response.statusText;
@@ -27,13 +27,13 @@ var getMoreInfo = function(imdbID) {
             modalDescription.textContent = 'Unable to connect to OMDb database';
             $('.ui.modal').modal('show');
         })
-};
+}
 
 function getMoreData () {
    var movie = JSON.parse(localStorage.getItem("imdbID"));
    getMoreInfo(movie);
    findVideo(movie);
-};
+}
 
 getMoreData();
 
@@ -76,7 +76,7 @@ function displayExtraInfo(data) {
     $(director).text(data.Director);
     var writer= document.getElementsByClassName('writer');
     $(writer).text(data.Writer);
-};
+}
 
 function findVideo(imdbID) {
   var query = `${youtubeURL}?part=snippet&q=${imdbID}%20trailer&key=${googleapiKey}`;
@@ -86,22 +86,35 @@ function findVideo(imdbID) {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       let videos = data.items;
       for (let i = 0; i < videos.length; i++) {
         if (videos[i].snippet.title.includes(document.querySelector('.movieTitle').textContent)) {
           var videoMatch = videos[i];
-          console.log(videoMatch);
           var videoID = videoMatch.id.videoId;
-          console.log(videoID);
           var movieTrailerURL =`https://www.youtube.com/watch?v=${videoID}`;
-          console.log(movieTrailerURL);
+          $(document).ready(showVideo(movieTrailerURL));
           break;
         }
       }
-
     })
   } else {
     setTimeout(findVideo, 15);
+  }
+}
+
+function showVideo(video) {
+  if (video){
+    var embedlink = video.replace(/watch\?v=/,`embed/`)
+    var videocontainer = document.createElement('div');
+    $(videocontainer).addClass('ui container embed');
+    var videoplayer = document.createElement('iframe');
+    $(videocontainer).attr('id','video');
+    $(videoplayer).attr('src',embedlink);
+    $(videoplayer).attr('class','fluid ui container');
+    $(videoplayer).appendTo(videocontainer);
+    var main = document.getElementsByTagName('main');
+    $(main).children().first().append(videocontainer);
+  } else {
+    setTimeout(showVideo,30);
   }
 }
