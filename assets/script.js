@@ -29,6 +29,7 @@ var searchBtn = document.querySelector(".ui button");
 var input = document.querySelector("input")
 
 
+
 var searchMovie = function(event) {
     event.preventDefault();
     var movieTitle = input.value.trim();
@@ -41,6 +42,14 @@ var searchMovie = function(event) {
     }
 };
 searchBtn.addEventListener("click", searchMovie);
+
+
+//Makes the 'Enter' key functional wiith the searchMovie function
+input.addEventListener("keypress", function(event) {
+  if (event.key == "Enter") {
+      searchMovie(event);
+  }
+});
 
 function displayMovieCards (data) {
   $(resultContainer).empty();
@@ -106,7 +115,9 @@ function displayMovieCards (data) {
 }
 
 
-
+//Adds event listner to the 'Learn More' button on each card.
+//Stores the IMDb ID to local storage.
+//Redirects user to the secondary page and more information.
 var learnMoreBtn = document.querySelector('.learnMore');
   document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains ('learnMore')) {
@@ -114,7 +125,6 @@ var learnMoreBtn = document.querySelector('.learnMore');
       var logID = getID.textContent;
       localStorage.setItem('imdbID', JSON.stringify(logID));
       window.location.replace("./learnMore.html");
-      console.log(logID)
     }
   });
 
