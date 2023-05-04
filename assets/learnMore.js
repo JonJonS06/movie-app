@@ -19,6 +19,13 @@ var getMoreInfo = function(imdbID) {
             $('.ui.modal').modal('show');
         })
 };
+
+function getMoreData () {
+   var movie = JSON.parse(localStorage.getItem("imdbID"));
+   getMoreInfo(movie);
+
+}
+getMoreData();
 function displayMovieCard (data) {
     var cardContainer= document.getElementsByClassName('card-container');
       var uiCard = document.createElement('div')
