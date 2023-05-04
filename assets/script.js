@@ -121,9 +121,9 @@ var learnMoreBtn = document.querySelector('.learnMore');
   var favoriteBtn = document.querySelector('.favMovie');
   document.body.addEventListener("click", function(event) {
     if (event.target.classList.contains ('favMovie')) {
-     var getTitle= event.target.parentElement.parentElement.parentElement.firstChild.nextSibling.firstChild.nextSibling.firstChild;
+     var getTitle= event.target.parentElement.parentElement.firstChild.nextSibling.firstChild
      var movieTitle= getTitle.textContent
-    
+    console.log(getTitle)
       saveMovie(movieTitle);
     }
   });
@@ -173,4 +173,5 @@ clearBtn.addEventListener('click', clearFavorites)
 
 function clearFavorites() {
   favorites.textContent = '';
+  localStorage.clear()
 }
