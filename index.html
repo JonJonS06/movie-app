@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/normalize.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Movie App</title>
 </head>
 <body>
     <header class="ui center aligned dividing header black hero">
-        <h1 class="ui blue header">Movie App Title</h1>
+        <h1 class="ui blue header">Movie App</h1>
     </header>
 
     <main class="ui double stackable grid container">
@@ -27,7 +28,9 @@
                     Clear Favorites
                 </button>
                 <hr>
-                <div class="ui inverted bulleted list" id="favorite-movies"></div>
+                <div class="ui inverted bulleted list" id="favorite-movies">
+                    <!-- Favorited Movies appear here -->
+                </div>
             </div>
         </div>
 
@@ -38,10 +41,12 @@
             <div class="ui hidden divider separate"></div>
             <div class="ui double stackable grid container">
                 <div class="four column row" id="results">
+                    <!-- Search Results appear here -->
                 </div>
             </div>
         </div>
 
+        <!-- Modal displays any errors eith from user input or issues with api request -->
         <div class="ui mini modal">
             <div class="ui header">Error:</div>
             <div class="modal-content"></div>
@@ -57,7 +62,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
     <script src="https://www.omdbapi.com/?i=tt3896198&apikey=9b9137db"></script>
-    <script src="./assets/script.js"></script>
+    <script src="./assets/js/script.js"></script>
     </body>
 </html>
 

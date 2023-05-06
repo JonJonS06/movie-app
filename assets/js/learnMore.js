@@ -3,11 +3,15 @@ let backToHome = document.querySelector('#homeBtn');
 let youtubeURL = 'https://www.googleapis.com/youtube/v3/search';
 let googleapiKey = 'AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc';
 
+// Event listener for return to home screen button to continue searching 
+// Clears local storage of imdbID so that it does not persist with continued searches and cause issues with additional learnMore page loading
 backToHome.addEventListener('click', function() {
     localStorage.removeItem("imdbID");
     window.location.replace('./index.html');
 })
 
+// Omdb api request for specific movie title given the imdbID
+// Sends api data response to display card generation and extra infor generation
 var getMoreInfo = function(imdbID) {
   var apiUrl = requestMovieUrl + '&i=' + imdbID + '&plot=full';
 
@@ -28,6 +32,8 @@ var getMoreInfo = function(imdbID) {
     })
 }
 
+// Pulls imdbID from local storage that was saved from the previous page from clicking the 'Learn More' button
+// Sends imdbID to omdb api call function and youtube v3 api
 function getMoreData () {
   var movie = JSON.parse(localStorage.getItem("imdbID"));
   getMoreInfo(movie);
@@ -36,6 +42,7 @@ function getMoreData () {
 
 getMoreData();
 
+// Generates the display card for the movie similarily to the one one the previous page
 function displayMovieCard (data) {
   var cardContainer= document.getElementsByClassName('card-container');
   var uiCard = document.createElement('div')
@@ -66,6 +73,7 @@ function displayMovieCard (data) {
   $(uiCard).addClass("column"); 
 }
 
+// Displays the additional infomation about the movie (full plot summary, cast, director, and writer)
 function displayExtraInfo(data) {
   var plot= document.getElementsByClassName('plot');
   $(plot).text(data.Plot);
@@ -77,6 +85,8 @@ function displayExtraInfo(data) {
   $(writer).text(data.Writer);
 }
 
+// Youtube v3 api query to find the movie's trailer
+// Finds the first video the matches the given the imdbID and trailer
 function findVideo(imdbID) {
   var query = `${youtubeURL}?part=snippet&q=${imdbID}%20trailer&key=${googleapiKey}`;
   if (document.getElementsByClassName('movieTitle')) {
@@ -101,15 +111,24 @@ function findVideo(imdbID) {
   }
 }
 
+// Displays the movie trailer found from the youtube v3 api request and embeds it below the displayed movie info
+// Adds youtube source data given semantic ui class guidelines
+// Makes the video adjust in size to screen display 
 function showVideo(video) {
   if (video){
     var embedlink = video.replace(/watch\?v=/,`embed/`)
+    var id = video.substring(32,video.length);
     var videocontainer = document.createElement('div');
-    $(videocontainer).addClass('ui container embed');
+    $(videocontainer).addClass('ui embed fullscreen');
     var videoplayer = document.createElement('iframe');
     $(videocontainer).attr('id','video');
+    $(videocontainer).attr('data-source','youtube');
+    $(videocontainer).attr('data-id',id);
     $(videoplayer).attr('src',embedlink);
     $(videoplayer).attr('class','fluid ui container');
+    $(videoplayer).attr('width','100%');
+    $(videoplayer).attr('height','100%');
+    $(videoplayer).attr('scrolling','no');
     $(videoplayer).appendTo(videocontainer);
     var main = document.getElementsByTagName('main');
     $(main).children().first().append(videocontainer);

@@ -5,6 +5,7 @@ var modalDescription = document.querySelector('.modal-content');
 var clearBtn = document.getElementById('clear-btn');
 var favorites = document.getElementById('favorite-movies');
 
+// Omdb api search query given a movie title returns json data for parsing and sends results to displayMovieCards for card generation
 var getMovieQuery = function(movie) {
   var apiUrl = requestMovieUrl + '&s=' + movie;
 
@@ -33,6 +34,8 @@ var getMovieQuery = function(movie) {
 var searchBtn = document.querySelector(".ui button");
 var input = document.querySelector("input");
 
+// Takes search input and sends to getMovieQuery for omdb search
+// Empty searches displays modal
 var searchMovie = function(event) {
   event.preventDefault();
   var movieTitle = input.value.trim();
@@ -44,15 +47,18 @@ var searchMovie = function(event) {
     $('.ui.modal').modal('show');
   }
 };
+
+// Event listener for search button click event
 searchBtn.addEventListener("click", searchMovie);
 
-//Makes the 'Enter' key functional wiith the searchMovie function
+// Makes the 'Enter' key functional wiith the searchMovie function
 input.addEventListener("keypress", function(event) {
   if (event.key == "Enter") {
       searchMovie(event);
   }
 });
 
+// Generates card information and poster image to search results section of page
 function displayMovieCards (data) {
   $(resultContainer).empty();
   var movieArray= data.Search;
@@ -107,7 +113,6 @@ function displayMovieCards (data) {
     uiCard.append(extra);
     resultContainer.append(uiCard);
     $(uiCard).addClass("column");
-
   }
 }
 
@@ -124,6 +129,7 @@ document.body.addEventListener("click", function(event) {
   }
 });
 
+// Event listener for the 'Favorite' button click to pass movie title to save functionality
 var favoriteBtn = document.querySelector('.favMovie');
 document.body.addEventListener("click", function(event) {
   if (event.target.classList.contains ('favMovie')) {
@@ -132,11 +138,11 @@ document.body.addEventListener("click", function(event) {
     saveMovie(movieTitle);
   }
 });
-  
+
+// Saves movie title from favorting to local storage
+// Checks that the movie is not already in favorites list
+// Calls display function for favorited movies
 function saveMovie(movieTitle) {
-  likedMovie = {
-    Movie:movieTitle,    
-  }
   var favoriteMovies = localStorage.getItem("favoriteMovies");
   if (favoriteMovies === null) {
     favoriteMovies = [];
@@ -153,7 +159,8 @@ function saveMovie(movieTitle) {
   }
   displayFavoriteMovies();
 }
-  
+
+// Displays favorited movies that exist in local storage and creates the list below the search bar
 function displayFavoriteMovies() {
   var favorites = document.getElementById('favorite-movies');
   favorites.textContent = '';
@@ -170,9 +177,11 @@ function displayFavoriteMovies() {
   }    
 }
 displayFavoriteMovies();
-        
+
+// Event listener for button click for clear favorites list
 clearBtn.addEventListener('click', clearFavorites);
 
+// Clears favorite list generated and local storage of that list
 function clearFavorites() {
   favorites.textContent = '';
   localStorage.clear();
