@@ -1,68 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/normalize.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Movie App</title>
-</head>
-<body>
-    <header class="ui center aligned dividing header black hero">
-        <h1 class="ui blue header">Movie App</h1>
-    </header>
 
-    <main class="ui double stackable grid container">
-        <div class="ui three wide column">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/normalize.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Movie App</title>
+</head>
+
+<body>
+  <header class="ui fixed borderless huge menu">
+    <div class="ui container grid">
+
+      <!--Start: Desktop Nav-->
+      <div class="computer only row">
+        <a class="header item">Movie App</a>
+        <div class="right menu">
+          <!-- Start: Search -->
+          <!-- <div class="item">
+            <div class="ui icon input">
+              <input type="text" placeholder="Search..." fdprocessedid="o71fhv">
+              <i class="search link icon"></i>
+            </div>
+          </div> -->
+          <!-- End: Search -->
+        </div>
+      </div>
+      <!--End: Desktop Nav-->
+
+      <!--Start: Mobile Nav-->
+      <div class="tablet mobile only row">
+        <a class="header item"> Movie App</a>
+        <!--End: Mobile Nav-->
+  </header>
+
+  <main class="ui container">
+    <div class="ui double stackable grid">
+      <div class="ui four wide column">
+        <div class="ui card centered">
+          <div class="content">
             <h2 class="ui header">Enter movie title</h2>
             <div class="fluid ui input focus">
-                <input type="text" placeholder="Search...">
+              <input type="text" placeholder="Search...">
             </div>
             <button class="fluid ui button">Search</button>
             <hr>
             <div class="fluid ui favorites container">
-                <h2>Favorite Movies:</h2>
-                <button class="fluid ui button" id="clear-btn">
-                    Clear Favorites
-                </button>
-                <hr>
-                <div class="ui inverted bulleted list" id="favorite-movies">
-                    <!-- Favorited Movies appear here -->
-                </div>
+              <h2>Favorite Movies:</h2>
+              <button class="fluid ui button" id="clear-btn">
+                Clear Favorites
+              </button>
+              <hr>
+              <div class="ui inverted bulleted list" id="favorite-movies">
+                <!-- Favorited Movies appear here -->
+              </div>
             </div>
+          </div>
         </div>
+      </div>
 
-        <div class="twelve wide column">
-            <div class="result-header">
-                <h2 class="ui center aligned header">Search Results</h2>
+      <div class="twelve wide column">
+        <div class="movies"></div>
+        <div class="results-container">
+          <div class="result-header">
+            <h2 class="ui center aligned header">Search Results</h2>
+          </div>
+          <div class="ui hidden divider separate"></div>
+          <div class="ui double stackable grid container">
+            <div class="three column row" id="results">
+              <!-- Search Results appear here -->
             </div>
-            <div class="ui hidden divider separate"></div>
-            <div class="ui double stackable grid container">
-                <div class="four column row" id="results">
-                    <!-- Search Results appear here -->
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Modal displays any errors eith from user input or issues with api request -->
-        <div class="ui mini modal">
-            <div class="ui header">Error:</div>
-            <div class="modal-content"></div>
-            <div class="actions">
-                <div class="ui red cancel button">
-                    <i class="remove icon"></i>
-                    Close
-                </div>
-            </div>
+      <!-- Modal displays any errors eith from user input or issues with api request -->
+      <div class="ui mini modal">
+        <div class="ui header">Error:</div>
+        <div class="modal-content"></div>
+        <div class="actions">
+          <div class="ui red cancel button">
+            <i class="remove icon"></i>
+            Close
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
-    <script src="https://www.omdbapi.com/?i=tt3896198&apikey=9b9137db"></script>
-    <script src="./assets/js/script.js"></script>
-    </body>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+  <script src="http://www.omdbapi.com/?i=tt3896198&apikey=2f390371"></script>
+  <script src="./assets/js/script.js"></script>
+</body>
+
 </html>
-

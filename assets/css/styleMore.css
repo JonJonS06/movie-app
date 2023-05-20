@@ -1,30 +1,38 @@
 header {
-    background: rgb(103, 103, 226);
+  background: rgb(103, 103, 226);
 }
 
-body,main {
-    background: grey;
+body,
+main {
+  background: grey;
 }
 
 .ui.four.wide.column.card-container {
-    background: rgba(152, 29, 29, 0.379);
+  background: rgba(152, 29, 29, 0.379);
 }
 
 .ui.card.column {
-    background: rgb(149, 43, 43);
+  background: rgb(149, 43, 43);
 }
 
 .advanced-info {
-    background: rgba(152, 29, 29, 0.379);
+  background: rgba(152, 29, 29, 0.379);
 }
 
-.plot, .cast, .director, .writer {
-    font-weight: bolder;
-    font-size: 1.15rem;
+.plot,
+.cast,
+.director,
+.writer {
+  font-weight: bolder;
+  font-size: 1.15rem;
 }
 
 #video {
-    width: 100%;
-    height: auto;
-    border: 4px solid black;
+  width: 100%;
+  height: auto;
+  border: 4px solid black;
+}
+
+.center {
+  margin: 0 auto !important;
 }

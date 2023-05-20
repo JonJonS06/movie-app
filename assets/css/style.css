@@ -1,30 +1,69 @@
-header {
-    background: rgb(249, 202, 116);
+main,
+body {
+  background: grey;
 }
-main,body {
-    background: grey;
+
+h1,
+h2 {
+  margin-top: 1rem;
+  padding: 1rem;
 }
-h1,h2 {
-    margin-top: 1rem;
-    padding: 1rem;
+
+input {
+  margin-bottom: 1rem !important;
 }
+
+body>.ui.container {
+  margin-top: 7rem;
+}
+
+.movies {
+  background: url('../images/movies.jpg');
+  height: 80vh;
+}
+
+.results-container {
+  display: none;
+}
+
+.ui.fixed.borderless.menu {
+  background-color: rgb(249, 202, 116);
+}
+
 .three.wide.column {
-    background: rgb(96, 87, 87);
+  background: rgb(96, 87, 87);
 }
-.fluid.ui.card.column {
-    background: rgb(149, 43, 43);
+
+.fluid.ui.card {
+  background: rgb(149, 43, 43);
+  margin-bottom: 1rem;
 }
+
+.fluid.ui.card>img {
+  background: dimgray;
+  max-height: 300px;
+  object-fit: contain;
+}
+
 .divider.separate {
-    background: black;
+  background: black;
 }
-.fluid.ui.card.column {
-    margin: 1rem;
-}
+
 .learnMore {
-    margin-bottom: 0.4rem;
+  margin-bottom: 0.4rem;
 }
+
+.movieTitle,
+.meta {
+  color: white !important;
+}
+
 li {
-    list-style: none;
-    font-size: 1.5rem;
-    font-weight: bold;
+  list-style: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.center {
+  margin: 0 auto;
 }
