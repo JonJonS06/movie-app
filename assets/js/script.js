@@ -1,4 +1,4 @@
-let requestMovieUrl = 'https://www.omdbapi.com/?apikey=9b9137db';
+let requestMovieUrl = 'http://www.omdbapi.com/?apikey=2f390371';
 var resultContainer = document.getElementById('results')
 var modal = document.querySelector('.modal');
 var modalDescription = document.querySelector('.modal-content');
@@ -10,7 +10,7 @@ var getMovieQuery = function(movie) {
   var apiUrl = requestMovieUrl + '&s=' + movie;
 
   fetch(apiUrl)
-    .then(function (response) {  
+    .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
           if (data!==undefined) {
@@ -30,7 +30,7 @@ var getMovieQuery = function(movie) {
       $('.ui.modal').modal('show');
     })
 }
- 
+
 var searchBtn = document.querySelector(".ui button");
 var input = document.querySelector("input");
 
@@ -59,18 +59,22 @@ input.addEventListener("keypress", function(event) {
 });
 
 // Generates card information and poster image to search results section of page
-function displayMovieCards (data) {
+function displayMovieCards(data) {
+  $('.movies').hide();
+  $('.results-container').show();
   $(resultContainer).empty();
   var movieArray= data.Search;
   for (var i = 0; i < movieArray.length; i++) {
     var data = movieArray[i];
-    var movieTitle= data.Title;
+    var movieTitle = data.Title;
+    var column = $('<div>')
+    column.addClass('column');
     var uiCard = document.createElement('div');
     $(uiCard).addClass("fluid ui card");
     var spacer = document.createElement('div');
     $(spacer).addClass("fluid ui hidden divider");
     uiCard.append(spacer);
-    var img = $('<img />', { 
+    var img = $('<img />', {
       src: data.Poster,
     });
     img.appendTo($(uiCard));
@@ -111,8 +115,9 @@ function displayMovieCards (data) {
     extra.append(hiddenId);
     extra.append(favorite);
     uiCard.append(extra);
-    resultContainer.append(uiCard);
-    $(uiCard).addClass("column");
+    column.append(uiCard);
+    console.log(column);
+    $('#results').append(column);
   }
 }
 
@@ -174,7 +179,7 @@ function displayFavoriteMovies() {
       createLi.style.borderBottom = 'thin dashed black';
       favorites.appendChild(createLi);
     }
-  }    
+  }
 }
 displayFavoriteMovies();
 

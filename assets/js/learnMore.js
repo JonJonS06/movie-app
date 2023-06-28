@@ -1,9 +1,9 @@
-let requestMovieUrl = ' https://www.omdbapi.com/?apikey=9b9137db';
+let requestMovieUrl = 'https://www.omdbapi.com/?apikey=9b9137db';
 let backToHome = document.querySelector('#homeBtn');
 let youtubeURL = 'https://www.googleapis.com/youtube/v3/search';
 let googleapiKey = 'AIzaSyCHGRBU3FkHUBex7-Ry8oZIxA-fQvhVnZc';
 
-// Event listener for return to home screen button to continue searching 
+// Event listener for return to home screen button to continue searching
 // Clears local storage of imdbID so that it does not persist with continued searches and cause issues with additional learnMore page loading
 backToHome.addEventListener('click', function() {
     localStorage.removeItem("imdbID");
@@ -16,7 +16,7 @@ var getMoreInfo = function(imdbID) {
   var apiUrl = requestMovieUrl + '&i=' + imdbID + '&plot=full';
 
   fetch(apiUrl)
-    .then(function (response) {  
+    .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
           displayMovieCard(data);
@@ -43,11 +43,11 @@ function getMoreData () {
 getMoreData();
 
 // Generates the display card for the movie similarily to the one one the previous page
-function displayMovieCard (data) {
+function displayMovieCard(data) {
   var cardContainer= document.getElementsByClassName('card-container');
   var uiCard = document.createElement('div')
   $(uiCard).addClass("ui card")
-  var img = $('<img />', { 
+  var img = $('<img />', {
   src: data.Poster,
   });
   img.appendTo($(uiCard));
@@ -69,8 +69,8 @@ function displayMovieCard (data) {
   meta.append(type);
   main.append(meta);
   uiCard.append(main);
-  $(uiCard).appendTo(cardContainer);
-  $(uiCard).addClass("column"); 
+  $(cardContainer).prepend(uiCard);
+  $(uiCard).addClass("center");
 }
 
 // Displays the additional infomation about the movie (full plot summary, cast, director, and writer)
@@ -95,7 +95,7 @@ function findVideo(imdbID) {
       return response.json();
     })
     .then((data) => {
-      let videos = data.items;
+    let videos = data.items;
       for (let i = 0; i < videos.length; i++) {
         if (videos[i].snippet.title.includes(document.querySelector('.movieTitle').textContent)) {
           var videoMatch = videos[i];
@@ -113,7 +113,7 @@ function findVideo(imdbID) {
 
 // Displays the movie trailer found from the youtube v3 api request and embeds it below the displayed movie info
 // Adds youtube source data given semantic ui class guidelines
-// Makes the video adjust in size to screen display 
+// Makes the video adjust in size to screen display
 function showVideo(video) {
   if (video){
     var embedlink = video.replace(/watch\?v=/,`embed/`)
@@ -130,8 +130,8 @@ function showVideo(video) {
     $(videoplayer).attr('height','100%');
     $(videoplayer).attr('scrolling','no');
     $(videoplayer).appendTo(videocontainer);
-    var main = document.getElementsByTagName('main');
-    $(main).children().first().append(videocontainer);
+    var main = $('.movie-card');
+    $(main).prepend(videocontainer);
   } else {
     setTimeout(showVideo,30);
   }

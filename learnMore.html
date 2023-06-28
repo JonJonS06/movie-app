@@ -1,55 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/normalize.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
-    <link rel="stylesheet" href="./assets/css/styleMore.css">
-    <title>Learn More</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/normalize.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+  <link rel="stylesheet" href="./assets/css/styleMore.css">
+  <title>Learn More</title>
 </head>
+
 <body>
-    <header class="ui center aligned header hero">
-        <button class="ui button" id="homeBtn">
-            Back to Search
-          </button>
-        <h1>Movie App More Info</h1>
-    </header>
-    <main class="ui grid container">
-        <div class="fluid ui row container grid">
-            <div class="fluid ui four wide column card-container">
-            </div>
-            <div class="fluid ui twelve wide column advanced-info padded">
-                <h2>Full Plot:</h2>
-                <p class="plot"></p>
-                <h2>Cast:</h2>
-                <p class="cast"></p>
-                <h2>Director:</h2>
-                <p class="director"></p>
-                <h2>Writer:</h2>
-                <p class="writer"></p>
-            </div>
-        </div>
-        <!-- Embed video appends here -->
+  <header class="ui center aligned header hero">
+    <button class="ui button" id="homeBtn">
+      Back to Search
+    </button>
+    <h1>Movie App More Info</h1>
+  </header>
+  <main class="ui stackable grid container">
+    <div class="fluid ui row container grid ">
+      <div class="fluid ui four wide column card-container">
+        <h3>Cast</h3>
+        <p class="cast"></p>
+        <h3>Director</h3>
+        <p class="director"></p>
+        <h3>Writer</h3>
+        <p class="writer"></p>
+      </div>
+      <div class="fluid ui twelve wide column advanced-info padded movie-card">
+        <h2>Plot</h2>
+        <p class="plot"></p>
+      </div>
+    </div>
+    <!-- Embed video appends here -->
 
-        <!-- Modal appears if there are any issues with the api request -->
-        <div class="ui mini modal">
-            <div class="ui header">Error:</div>
-            <div class="modal-content"></div>
-            <div class="actions">
-                <div class="ui red cancel button">
-                    <i class="remove icon"></i>
-                    Close
-                </div>
-            </div>
+    <!-- Modal appears if there are any issues with the api request -->
+    <div class="ui mini modal">
+      <div class="ui header">Error:</div>
+      <div class="modal-content"></div>
+      <div class="actions">
+        <div class="ui red cancel button">
+          <i class="remove icon"></i>
+          Close
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js" integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
-    <script src="https://www.omdbapi.com/?i=tt3896198&apikey=9b9137db"></script>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script src="assets/js/learnMore.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"
+    integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+  <script src="http://www.omdbapi.com/?i=tt3896198&apikey=2f390371"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="assets/js/learnMore.js"></script>
 </body>
+
 </html>
